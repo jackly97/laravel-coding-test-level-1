@@ -7,10 +7,22 @@
                 <h2>Events</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('events.create') }}"> Create New Event</a>
+                <a class="btn btn-light" href="{{ route('logout') }}">Logout</a>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <a class="btn btn-success" href="{{ route('events.create') }}">Create New Event</a>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-info" href="{{ url('external-api') }}">Display External Api</a>
+            </div>
+        </div>
+    </div>
+
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
