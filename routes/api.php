@@ -1,19 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\v1\api\EventController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('/v1/events')->group(function () {
+    Route::get('/', [EventController::class, 'index']);
+    Route::get('/active-events', [EventController::class, 'activeEvents']);
+    Route::post('/', [EventController::class, 'store']);
+    Route::get('/{id}', [EventController::class, 'show']);
+    Route::put('/{id}', [EventController::class, 'update']);
+    Route::patch('/{id}', [EventController::class, 'patch']);
+    Route::delete('/{id}', [EventController::class, 'destroy']);
 });
