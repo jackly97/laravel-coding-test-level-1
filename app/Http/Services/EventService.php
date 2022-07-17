@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Jobs\Email\SendCreateEventNotification;
 use App\Models\Event;
 
 class EventService
@@ -18,11 +19,13 @@ class EventService
         $startAt = date('Y-m-d H:i:s', strtotime($request->startAt));
         $endAt = date('Y-m-d H:i:s', strtotime($request->endAt));
 
-        Event::create([
+        $event = Event::create([
             'name' => $request->name,
             'start_at' => $startAt,
             'end_at' => $endAt,
         ]);
+
+        SendCreateEventNotification::dispatch($event);
 
         return redirect()->route('events.index')->with('success', 'Successfully Created Event!');
     }
